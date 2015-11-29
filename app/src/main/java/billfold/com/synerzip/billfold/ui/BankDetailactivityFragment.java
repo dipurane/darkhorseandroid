@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -205,13 +204,8 @@ public class BankDetailactivityFragment extends Fragment implements View.OnClick
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            Log.e("Json Obj ::", jsonObject.toString());
-
             RequestTask requestTask = new RequestTask();
             requestTask.execute(new String[]{String.format(AppConstant.BANK_ACCOUNT, id), jsonObject.toString()});
-
-
         }
     }
 
@@ -233,7 +227,6 @@ public class BankDetailactivityFragment extends Fragment implements View.OnClick
 
         @Override
         protected void onPostExecute(String s) {
-            Log.e("Response ::", "" + s);
             if (null != mProgressDialog && mProgressDialog.isShowing()) {
                 mProgressDialog.dismiss();
             }

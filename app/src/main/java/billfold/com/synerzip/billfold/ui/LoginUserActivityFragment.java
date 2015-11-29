@@ -14,7 +14,6 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +33,7 @@ import org.json.JSONObject;
 import billfold.com.synerzip.billfold.R;
 import billfold.com.synerzip.billfold.connection.ConnectionManager;
 import billfold.com.synerzip.billfold.constant.AppConstant;
+import billfold.com.synerzip.billfold.utils.Utils;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -180,15 +181,20 @@ public class LoginUserActivityFragment extends Fragment implements View.OnClickL
                 mETMobileNumber.setError("Please Enter valid Mobile Number");
                 return;
             }
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("mobileNumber", mobileNumber);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
-            RequestTask requestTask = new RequestTask(MOB_REG);
-            requestTask.execute(new String[]{AppConstant.MOB_REG_URL, jsonObject.toString()});
+            if (Utils.isNetworkAvailable(getActivity())) {
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("mobileNumber", mobileNumber);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                RequestTask requestTask = new RequestTask(MOB_REG);
+                requestTask.execute(new String[]{AppConstant.MOB_REG_URL, jsonObject.toString()});
+            } else {
+                Toast.makeText(getActivity(), "Please check your internet connection.", Toast.LENGTH_LONG).show();
+            }
 
         } else if (view == mBTCodeVerify) {
 
@@ -198,16 +204,21 @@ public class LoginUserActivityFragment extends Fragment implements View.OnClickL
                 mETCodeVerification.setError("Please Enter valid Code");
                 return;
             }
+            if (Utils.isNetworkAvailable(getActivity())) {
 
-            RequestTask requestTask = new RequestTask(MOB_VER);
-            JSONObject jsonObject = new JSONObject();
-            try {
-                jsonObject.put("mobileNumber", mobileNumber);
-                jsonObject.put("verificationCode", message);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                RequestTask requestTask = new RequestTask(MOB_VER);
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("mobileNumber", mobileNumber);
+                    jsonObject.put("verificationCode", message);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                requestTask.execute(new String[]{AppConstant.MOB_VER_URL, jsonObject.toString()});
+            } else {
+                Toast.makeText(getActivity(), "Please check your internet connection.", Toast.LENGTH_LONG).show();
             }
-            requestTask.execute(new String[]{AppConstant.MOB_VER_URL, jsonObject.toString()});
+
 
         } else if (view == mBTFinalSubmit) {
 
@@ -237,21 +248,25 @@ public class LoginUserActivityFragment extends Fragment implements View.OnClickL
                 return;
             }
 
-            RequestTask requestTask = new RequestTask(USER_REG);
+            if (Utils.isNetworkAvailable(getActivity())) {
+                RequestTask requestTask = new RequestTask(USER_REG);
 
-            JSONObject jsonObject = new JSONObject();
+                JSONObject jsonObject = new JSONObject();
 
-            try {
-                jsonObject.put("lastName", lastName.trim());
-                jsonObject.put("firstName", firstName.trim());
-                jsonObject.put("email", emaId.trim());
-                jsonObject.put("phoneNumber", mobileNumber);
-                jsonObject.put("is_verified", true);
-                jsonObject.put("is_verified", true);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                try {
+                    jsonObject.put("lastName", lastName.trim());
+                    jsonObject.put("firstName", firstName.trim());
+                    jsonObject.put("email", emaId.trim());
+                    jsonObject.put("phoneNumber", mobileNumber);
+                    jsonObject.put("is_verified", true);
+                    jsonObject.put("is_verified", true);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                requestTask.execute(new String[]{AppConstant.USER_VER_URL, jsonObject.toString()});
+            } else {
+                Toast.makeText(getActivity(), "Please check your internet connection.", Toast.LENGTH_LONG).show();
             }
-            requestTask.execute(new String[]{AppConstant.USER_VER_URL, jsonObject.toString()});
 
 
         }
@@ -319,7 +334,6 @@ public class LoginUserActivityFragment extends Fragment implements View.OnClickL
         @Override
         protected void onPostExecute(String result) {
 
-            Log.e("Result ::", "" + result);
             if (null != mProgressDialog && mProgressDialog.isShowing()) {
                 mProgressDialog.dismiss();
             }
@@ -336,7 +350,6 @@ public class LoginUserActivityFragment extends Fragment implements View.OnClickL
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     int id = jsonObject.getInt("id");
-                    Log.e("id :::", "" + id);
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt(AppConstant.USER_ID, id);
@@ -380,7 +393,6 @@ public class LoginUserActivityFragment extends Fragment implements View.OnClickL
                 e.printStackTrace();
             }
             requestTask.execute(new String[]{AppConstant.MOB_VER_URL, jsonObject.toString()});
-            Log.e("receiver", "Got message: " + message);
         }
     };
 
@@ -389,7 +401,6 @@ public class LoginUserActivityFragment extends Fragment implements View.OnClickL
         mRLCodeVericationLayout.setVisibility(View.VISIBLE);
         mRLUserDetailLayout.setVisibility(View.GONE);
         mRLMobileRegLayout.setVisibility(View.GONE);
-        //handler.postDelayed(runnable, 3000);
         showProgressDialog(getResources().getString(R.string.checking_for_sms));
 
     }

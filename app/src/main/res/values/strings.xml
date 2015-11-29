@@ -49,4 +49,6 @@
     <string name="amount_label">Amount :</string>
     <string name="date">Date :</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="pay">Pay</string>
+    <string name="receive">Receive</string>
 </resources>

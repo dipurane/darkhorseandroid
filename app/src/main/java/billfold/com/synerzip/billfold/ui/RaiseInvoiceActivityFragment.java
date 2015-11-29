@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -161,9 +160,6 @@ public class RaiseInvoiceActivityFragment extends Fragment implements View.OnCli
                 if (transactionId != -1) {
                     sendStatusCheckRequest(transactionId);
                 }
-
-
-                Log.e("raised Invoice ::", raisedInvoiceResponse);
             }
             return result;
         }
@@ -171,7 +167,6 @@ public class RaiseInvoiceActivityFragment extends Fragment implements View.OnCli
         @Override
         protected void onPostExecute(Integer s) {
 
-            Log.e("Response Code :: ", "" + s);
             if (null != mProgressDialog && mProgressDialog.isShowing()) {
                 mProgressDialog.dismiss();
             }

@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -275,6 +274,9 @@ public class PayFragment extends Fragment implements View.OnClickListener {
         // else handle other activity results
     }
 
+    /**
+     * open stripe call to validate card and get the token
+     */
 
     public void saveCreditCard() {
 
@@ -292,7 +294,6 @@ public class PayFragment extends Fragment implements View.OnClickListener {
                     PUBLISHABLE_KEY,
                     new TokenCallback() {
                         public void onSuccess(Token token) {
-                            Log.e("Token ::", "" + token.getId());
                             if (null != mProgressDialog && mProgressDialog.isShowing()) {
                                 mProgressDialog.dismiss();
                             }
@@ -305,11 +306,8 @@ public class PayFragment extends Fragment implements View.OnClickListener {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Log.e("Json String ::", "" + jsonObject.toString());
                             RequestTask requestTask = new RequestTask(ADD_CARD);
                             requestTask.execute(new String[]{String.format(AppConstant.ADD_CARD_TOKEN, id), jsonObject.toString()});
-
-
                         }
 
                         public void onError(Exception error) {

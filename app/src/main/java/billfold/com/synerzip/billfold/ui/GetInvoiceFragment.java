@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -161,7 +160,6 @@ public class GetInvoiceFragment extends Fragment implements View.OnClickListener
 
         @Override
         protected void onPostExecute(String s) {
-            Log.e("Response ::", "" + s);
             if (null != mProgressDialog && mProgressDialog.isShowing()) {
                 mProgressDialog.dismiss();
             }
@@ -188,7 +186,6 @@ public class GetInvoiceFragment extends Fragment implements View.OnClickListener
             } else if (requestType == FETCH_CARD_LIST) {
 
                 try {
-                    Log.e("Response card List ::", "" + s);
                     JSONArray jsonArray = new JSONArray(s);
                     ArrayList<CardDetail> cardDetailsList = new ArrayList<CardDetail>();
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -268,9 +265,6 @@ public class GetInvoiceFragment extends Fragment implements View.OnClickListener
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String strName = arrayAdapter.getItem(which);
-
-
                         JSONObject jsonObject = new JSONObject();
                         try {
                             jsonObject.put("cardId", list.get(which).cardId);

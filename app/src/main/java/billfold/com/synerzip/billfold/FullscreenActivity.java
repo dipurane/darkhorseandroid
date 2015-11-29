@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import billfold.com.synerzip.billfold.constant.AppConstant;
 import billfold.com.synerzip.billfold.ui.HomeActivity;
 import billfold.com.synerzip.billfold.ui.LoginUserActivity;
 
@@ -45,7 +46,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 // Start your app main activity
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(FullscreenActivity.this);
-                int id = preferences.getInt("userId", -1);
+                int id = preferences.getInt(AppConstant.USER_ID, -1);
                 if (id == -1) {
                     Intent i = new Intent(FullscreenActivity.this, LoginUserActivity.class);
                     startActivity(i);

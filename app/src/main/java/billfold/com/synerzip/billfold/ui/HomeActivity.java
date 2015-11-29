@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import billfold.com.synerzip.billfold.R;
 
+/**
+ * home Screen where we manage raise and get invoice add card /bank detail
+ */
 public class HomeActivity extends AppCompatActivity {
 
     public static boolean isManuallyPaused;
@@ -20,8 +23,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home2);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Pay"));
-        tabLayout.addTab(tabLayout.newTab().setText("Receive"));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.pay));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.receive));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
