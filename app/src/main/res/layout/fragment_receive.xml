@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="billfold.com.synerzip.billfold.ui.PayFragment">
+
+
+    <Button
+        android:id="@+id/raise_Button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_white_gray_back"
+        android:text="Raise Invoice" />
+
+
+    <Button
+        android:id="@+id/Add_bankDetail_Button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/raise_Button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_white_gray_back"
+        android:text="Add Bank Detail" />
+
+
+    <Button
+        android:id="@+id/history_Button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/Add_bankDetail_Button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_white_gray_back"
+        android:text="History" />
+
+
+</RelativeLayout>

@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="billfold.com.synerzip.billfold.ui.PayFragment">
+
+
+    <Button
+        android:id="@+id/fetch_Button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_white_gray_back"
+        android:text="Fetch Invoice" />
+
+
+    <ImageView
+        android:id="@+id/support_View"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:id="@+id/Add_Button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/fetch_Button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_white_gray_back"
+        android:text="Add Card" />
+
+
+    <!--<Button
+        android:id="@+id/fetch_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Add_Button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="60dp"
+        android:text="Fetch" />-->
+
+    <Button
+        android:id="@+id/history_Button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/Add_Button"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_white_gray_back"
+        android:text="History" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/history_Button"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_toLeftOf="@+id/support_view1"
+        android:text="BVC"
+        android:textColor="@android:color/black"
+        android:textSize="22dp" />
+
+
+    <TextView
+        android:id="@+id/support_view1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/history_Button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text=":" />
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/bvc_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/history_Button"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/support_view1"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

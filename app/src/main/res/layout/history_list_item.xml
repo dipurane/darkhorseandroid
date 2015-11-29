@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/to_label_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/to_value_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/to_label_TextView"
+        android:text="9920826261"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+
+
+    <TextView
+        android:id="@+id/amount_value_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:text="500"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/toamount_label_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/amount_value_TextView"
+        android:text="@string/amount_label"
+        android:textSize="18dp" />
+
+
+    <TextView
+        android:id="@+id/date_label_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/to_label_TextView"
+        android:layout_marginTop="5dp"
+        android:text="@string/date"
+        android:textSize="18dp" />
+
+
+    <TextView
+        android:id="@+id/status_value_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/amount_value_TextView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Open"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/status_label_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toamount_label_TextView"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/status_value_TextView"
+        android:text="Status :"
+        android:textSize="18dp" />
+
+
+</RelativeLayout>
