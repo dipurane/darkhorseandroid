@@ -158,7 +158,8 @@ public class RaiseInvoiceActivityFragment extends Fragment implements View.OnCli
                 }
 
                 if (transactionId != -1) {
-                    sendStatusCheckRequest(transactionId);
+                    requestType = CHECK_RAISED_INVOICE_STATUS;
+                    result = sendStatusCheckRequest(transactionId);
                 }
             }
             return result;
@@ -184,6 +185,14 @@ public class RaiseInvoiceActivityFragment extends Fragment implements View.OnCli
                 } else {
                     showDialog("Alert", "Internal Server Error,Please try again later.");
                 }
+            } else {
+
+                if (s != 2) {
+                    Toast.makeText(getActivity(), "Transaction Successfully completed", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "Transaction rejected", Toast.LENGTH_LONG).show();
+                }
+                getActivity().finish();
             }
         }
     }
@@ -204,8 +213,9 @@ public class RaiseInvoiceActivityFragment extends Fragment implements View.OnCli
     }
 
 
-    private void sendStatusCheckRequest(int transactionId) {
+    private int sendStatusCheckRequest(int transactionId) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        int rejectResponse = 0;
         int id = preferences.getInt(AppConstant.USER_ID, -1);
 
         ConnectionManager connectionManager = new ConnectionManager();
@@ -216,13 +226,14 @@ public class RaiseInvoiceActivityFragment extends Fragment implements View.OnCli
 
             String status = jsonObject.getString("status");
             if (status.equalsIgnoreCase("OPEN")) {
-                sendStatusCheckRequest(transactionId);
-            } else {
-
+                rejectResponse = sendStatusCheckRequest(transactionId);
+            } else if (status.equalsIgnoreCase("REJECTED")) {
+                rejectResponse = 2;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return rejectResponse;
     }
 
 

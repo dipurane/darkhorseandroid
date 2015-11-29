@@ -107,7 +107,11 @@ public class HistoryActivityFragment extends Fragment {
                         HistoryDataSet historyDataSet = new HistoryDataSet();
                         historyDataSet.setDate(jsonObject.getString("createdDateStr"));
                         historyDataSet.setAmount(String.valueOf(jsonObject.getInt("amount")));
-                        historyDataSet.setPayTo(jsonObject.getString("receiverPhoneNumber"));
+                        if (from.equalsIgnoreCase("pay")) {
+                            historyDataSet.setPayTo(jsonObject.getString("receiverPhoneNumber"));
+                        } else {
+                            historyDataSet.setPayTo(jsonObject.getString("payerPhoneNumber"));
+                        }
                         historyDataSet.setStatus(jsonObject.getString("status"));
                         historyDataSet.setId(jsonObject.getInt("id"));
                         historyList.add(historyDataSet);
